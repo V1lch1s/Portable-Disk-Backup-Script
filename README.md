@@ -31,7 +31,7 @@ Start > Settings > System > About > Advanced System Settings (Right burguer menu
 ### Confirm it works in Power Shell
 <img src="./assets/DU.JPG" alt="Disk Usage Sysinternals Suite" width="600" />
 
-## 2. PowerShell needs or have restrictions to run scripts
+## 2. PowerShell needs to be unrestricted to run scripts
 Try the following command:
 > Set-ExecutionPolicy -ExecutionPolicy Unrestricted
 
