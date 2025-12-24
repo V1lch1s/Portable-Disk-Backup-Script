@@ -22,7 +22,7 @@
 ### I assume that you just want to copy all the files and folders from your Portable disk, and Your disk format is GPT with the Windows' default file system NTFS.
 
 # ⚠ Requirement
-### This script needs Sysinternals Suite installed in your PC to work properly.
+## 1. This script needs Sysinternals Suite installed in your PC to work properly.
 Take it from the official site: https://learn.microsoft.com/es-es/sysinternals/downloads/sysinternals-suite
 
 ### Then Add the installation path to the environmental variables (Windows).
@@ -30,3 +30,9 @@ Start > Settings > System > About > Advanced System Settings (Right burguer menu
 
 ### Confirm it works in Power Shell
 <img src="./assets/DU.JPG" alt="Disk Usage Sysinternals Suite" width="600" />
+
+## 2. PowerShell needs or have restrictions to run scripts
+Try the following command:
+> Set-ExecutionPolicy -ExecutionPolicy Unrestricted
+
+See the official site: https://learn.microsoft.com/es-es/previous-versions/windows/powershell-scripting/hh847748(v=wps.640)?redirectedfrom=MSDN
