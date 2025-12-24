@@ -28,6 +28,9 @@ Take it from the official site: https://learn.microsoft.com/es-es/sysinternals/d
 ### Then Add the installation path to the environmental variables (Windows).
 Start > Settings > System > About > Advanced System Settings (Right burguer menu) > Environmental Variables > System Variables > Path > Add your installation path "Z:\SysinternalsSuite"
 
+### Accept the EULA (End User License Agreement)
+> du -acceptEula
+
 ### Confirm it works in Power Shell
 <img src="./assets/DU.JPG" alt="Disk Usage Sysinternals Suite" width="600" />
 
