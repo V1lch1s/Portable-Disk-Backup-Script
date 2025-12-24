@@ -20,3 +20,10 @@
 
 # ⚠️ Note
 ### I assume that you just want to copy all the files and folders from your Portable disk, and Your disk format is GPT with the Windows' default file system NTFS.
+
+# ⚠ Requirement
+### This script needs SysInternalsSuite installed in your PC to work properly.
+Take it from the official site: https://learn.microsoft.com/es-es/sysinternals/downloads/sysinternals-suite
+
+### Then Add the installation path to the environmental variables (Windows).
+Start > Settings > System > About > Advanced System Settings (Right burguer menu) > Environmental Variables > System Variables > Path > Add your installation path "Z:\SysinternalsSuite"
