@@ -1,10 +1,12 @@
 # Portable Disk Backup Script 💽
 ### PowerShell module for backing up a removable Disk Drive
-<img src="./assets/powershell.png" alt="PowerShell Icon" width="100" />
+<div>
+  <img src="./assets/powershell.png" alt="PowerShell Icon" width="100" />
 
-<img src="./assets/plus.png" alt="Plus Icon" width="50" />
+  <img src="./assets/plus.png" alt="Plus Icon" width="50" />
 
-<img src="./assets/HDD.jpeg" alt="Hard Disk Drive" width="100" />
+  <img src="./assets/HDD.jpeg" alt="Hard Disk Drive" width="100" />
+</div>
 
 ## How to use?
 ### 1. Change the Origin and destination disk letters in the script
