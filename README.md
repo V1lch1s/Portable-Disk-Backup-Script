@@ -35,7 +35,7 @@ Start > Settings > System > About > Advanced System Settings (Right burguer menu
 <img src="./assets/DU.JPG" alt="Disk Usage Sysinternals Suite" width="600" />
 
 ## 2. PowerShell needs to be unrestricted to run scripts
-Try the following command:
-> Set-ExecutionPolicy -ExecutionPolicy Unrestricted
-
-See the official site: https://learn.microsoft.com/es-es/previous-versions/windows/powershell-scripting/hh847748(v=wps.640)?redirectedfrom=MSDN
+| Try the following command:
+| > Set-ExecutionPolicy -ExecutionPolicy Unrestricted
+|
+| See the official site: https://learn.microsoft.com/es-es/previous-versions/windows/powershell-scripting/hh847748(v=wps.640)?redirectedfrom=MSDN
