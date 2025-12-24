@@ -29,4 +29,4 @@ Take it from the official site: https://learn.microsoft.com/es-es/sysinternals/d
 Start > Settings > System > About > Advanced System Settings (Right burguer menu) > Environmental Variables > System Variables > Path > Add your installation path "Z:\SysinternalsSuite"
 
 ### Confirm it works in Power Shell
-<img src="./assets/DU.jpg" alt="Disk Usage from SysinternalsSuite" width="500" />
+<img src="./assets/DU.jpg" alt="Disk Usage" width="500" />
