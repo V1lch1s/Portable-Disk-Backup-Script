@@ -21,7 +21,7 @@
 <img src="./assets/PS1Exec.jpg" alt="PowerShell Script Execution" width="600" />
 
 # ⚠️ Note
-### I assume that you just want to copy all the files and folders from your Portable disk, and Your disk format is GPT with the Windows' default file system NTFS.
+### I assume that you have already edited the registry key HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem in regedit. You must change the value for the key LongPathsEnabled (DWORD) from 0 to 1 and then save.
 
 # ⚠ Requirement
 ## 1. This script needs Sysinternals Suite installed in your PC to work properly.
