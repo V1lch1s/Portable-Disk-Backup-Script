@@ -6,13 +6,17 @@ $Disk_Destiny = "Z" # Unidad donde ira el respaldo                    ##
 $DU_exe = "Z:\SysinternalsSuite\du.exe" # Ejecutable de Disk Usage    ##
                                         #   (Sysinternals Suite)      ##
 
-################ Tests ################ 
+################ Tests ################
+# IMPORTANTE: Cuando se corre con esta parte, 
+#             ejecutar desde la carpeta en la que se 
+#             localiza el script con .\RespaldoHDD.ps1
 $ruta_Respaldo = "$(Get-Location)\TESTS-Respaldar-PortableHDD\RespaldoHDD"
 $rutas_Origen = @(
-    "$(Get-Location)\TESTS-Respaldar-PortableHDD\Test1",
-    "$(Get-Location)\TESTS-Respaldar-PortableHDD\Test2"
+  "$(Get-Location)\TESTS-Respaldar-PortableHDD\Test1",
+  "$(Get-Location)\TESTS-Respaldar-PortableHDD\Test2"
 )
 
+################ Real #################
 # $ruta_Respaldo = "${Disk_Destiny}:\RespaldoHDD"
 # $rutas_Origen = @(
 #   "${Disk_Origin}:\Carpeta-Gigante-1",
@@ -53,33 +57,29 @@ New-Item -Path $ruta_Respaldo -ItemType Directory -Force | Out-Null
 # Copiar archivos del Origen en el directorio de Respaldo
 Write-Host "Backing Up..."
 Write-Host ""
+$iter = 0
 $errores = @()
 foreach ($ruta in $rutas_Origen) {
-  try {
-    Copy-Item -Path $ruta -Destination $ruta_Respaldo -Recurse -Force -ErrorAction Stop
+  $iter++
+  Write-Progress `
+    -Activity "Copiando Carpeta $iter" `
+    -Status "$iter of $files_original" `
+    -PercentComplete (($iter / $files_original) * 100)
+  $destino = Join-Path $ruta_Respaldo (Split-Path $ruta -Leaf)
+  $cmd = @(
+    "`"$ruta`"", # ruta en rutas_Origen
+    "`"$destino`"", # Destino del Respaldo
+    "/E", # Copia subdirectorios, incluyendo vacíos
+    "/COPY:DAT", # Define qué se copia: D Data | A Attributes | T Timestamps
+    "/R:0", # Reintento en caso de error. Falla → Registra → Sigue
+    "/W:0", # Tiempo de espera entre reintentos (s)
+    "/NFL", # No File List
+    "/NDL"  # No Directory List. No imprime cada carpeta procesada.
+  )
+  robocopy @cmd
+  if ($LASTEXITCODE -ge 8) {
+    $errores += "Error copiando $ruta (code $LASTEXITCODE)"
   }
-  catch {
-    $errores += $_ # $($_.TargetObject) Para saber qué objeto se intentó copiar
-    if ($_.TargetObject) {
-      Write-Error "Fail: $($_.TargetObject)"
-    } else { Write-Error "Fail: $ruta" }
-  }
-}
-
-if ($errores.Count -gt 0) {
-  Write-Host "Incomplete Backup: $ruta_Respaldo"
-  Write-Host ""
-  Write-Host "Found Errors:"
-  Write-Host "---------------------------------"
-  foreach ($e in $errores) {
-    Write-Host "File: $($e.TargetObject)"
-    Write-Host "Details: $($e.Exception.Message)"
-    Write-Host ""
-  }
-  exit 1
-
-} else {
-  Write-Host "Backup completed in: $ruta_Respaldo"
 }
 
 
@@ -102,7 +102,7 @@ if (-not (Test-Path $ruta_Respaldo)) {
 
 ######### La estructura de la salida de Disk Usage debe ser:
 # PS C:\WINDOWS\system32>
-# >> $size = & du -q $(Get-Location)\TESTS-Respaldar-PortableHDD\RespaldoHDD
+# >> $size = & du -q "$(Get-Location)\TESTS-Respaldar-PortableHDD\RespaldoHDD"
 # >> $size | Out-Host
 # Processing...
 #
@@ -159,14 +159,7 @@ if (-not (Test-Path $ruta_Respaldo)) {
 #
 # Write-Host "Total Size: $size bytes"
 
-$sizeB = (
-  & $DU_exe -q $ruta_Respaldo |
-  Select-String "Size:" |
-  Select-Object -First 1 |
-  ForEach-Object {
-    ($_ -replace '[^\d]', '') -as [int64]
-  }
-)
+$sizeB = Get-DUBytes -DU_exe_param $DU_exe -ruta_param $ruta_Respaldo
 
 Write-Host "Size Origin: $sizeA"
 Write-Host "Size Backup: $sizeB"
